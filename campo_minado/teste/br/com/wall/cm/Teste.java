@@ -7,8 +7,10 @@ import org.junit.jupiter.api.Test;
 class Teste {
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+	void testarSeIgualADois() {
+		int a = 1 + 1;
 
+		assertEquals(2, a);
+
+	}
 }
