@@ -3,6 +3,8 @@ package br.com.wall.cm.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.wall.cm.excecao.ExplosaoException;
+
 public class Campo {
 
 	private final int linha;
@@ -28,16 +30,40 @@ public class Campo {
 		int deltaColuna = Math.abs(coluna - vizinho.coluna);
 		int deltaGeral = deltaColuna + deltaLinha;
 
-		
-		if(deltaGeral == 1 && !diagonal) {
+		if (deltaGeral == 1 && !diagonal) {
 			vizinhos.add(vizinho);
 			return true;
-		} else if(deltaGeral ==2 && diagonal) {
+		} else if (deltaGeral == 2 && diagonal) {
 			vizinhos.add(vizinho);
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	void alternarMarcador() {
+		if (!aberto) {
+			marcado = !marcado;
+		}
+	}
+
+	boolean abrir() {
+		if (!aberto && !marcado) {
+			aberto = true;
+
+			if (minado) {
+				throw new ExplosaoException();
+			}
+			if(vizinhacaSegura()) {
+				vizinhos.forEach(v -> v.abrir());
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	boolean vizinhacaSegura() {
+		return vizinhos.stream().noneMatch(v -> v.minado);
 	}
 
 }
