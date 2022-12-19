@@ -55,5 +55,38 @@ class CampoTeste {
 		boolean resultado = campo.adicionarVizinho(vizinho);
 		assertFalse(resultado);
 	}
+	
+	@Test
+	void testeValorPadraoAtributoMarcao() {
+		
+		assertFalse(campo.IsMarcado());
+	}
+	
+	@Test
+	void testeAltenarMarcao() {
+		campo.alternarMarcador();
+		assertTrue(campo.IsMarcado());
+	}
+
+	
+	@Test
+	void testeAltenarMarcacaoDuasChamadas() {
+		campo.alternarMarcador();
+		campo.alternarMarcador();
+		assertFalse(campo.IsMarcado());
+	}
+	
+	@Test
+	void testeAbrirNaoMinadoNaoMarcado() {
+		assertTrue(campo.abrir());
+	}
+	
+	@Test
+	void testeAbrirNaoMinadoMarcado() {
+		campo.alternarMarcador();
+		assertFalse(campo.abrir());
+	}
+	
+	
 
 }
