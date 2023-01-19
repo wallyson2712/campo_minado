@@ -112,7 +112,7 @@ public class Campo {
 	
 	public String toString() {
 		if(marcado) {
-			return "x"
+			return "x";
 		}else if(aberto && minado) {
 			return "*";
 		} else if(aberto && minasNaVizinhaca() > 0) {
